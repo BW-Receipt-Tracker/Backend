@@ -1,6 +1,7 @@
 package com.lambdaschool.usermodel.controllers;
 
 import com.lambdaschool.usermodel.models.Receipt;
+import com.lambdaschool.usermodel.services.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
