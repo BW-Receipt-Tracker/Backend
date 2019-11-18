@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "receipts")
-@JsonIgnoreProperties(value = {"receiptid", "user"})
+@JsonIgnoreProperties(value = {"user"})
 public class Receipt {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +26,6 @@ public class Receipt {
 
     private String imageurl;
 
-    @Transient
     @ManyToOne
     @JsonIgnoreProperties("receipts")
     private User user;

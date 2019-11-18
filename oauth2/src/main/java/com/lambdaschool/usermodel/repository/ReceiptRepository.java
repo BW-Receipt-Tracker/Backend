@@ -18,7 +18,7 @@ public interface ReceiptRepository extends CrudRepository<Receipt, Long> {
     void deleteReceipt(long receiptId);
      */
 
-    List<Receipt> getAll();
+    List<Receipt> findAllBy();
 
     Receipt findByReceiptid(long receiptId);
 }

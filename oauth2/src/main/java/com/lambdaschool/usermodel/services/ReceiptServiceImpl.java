@@ -7,6 +7,7 @@ import com.lambdaschool.usermodel.repository.ReceiptRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -19,7 +20,7 @@ public class ReceiptServiceImpl implements ReceiptService{
 
     @Override
     public List<Receipt> getReceipts() {
-        return receiptRepo.getAll();
+        return receiptRepo.findAllBy();
     }
 
     @Override
@@ -28,6 +29,7 @@ public class ReceiptServiceImpl implements ReceiptService{
                 .orElseThrow(() -> new ResourceNotFoundException("Receipt not found"));
     }
 
+    @Transactional
     @Override
     public Receipt addReceipt(long userid, Receipt receipt) {
         Receipt newReceipt = new Receipt();
@@ -41,6 +43,7 @@ public class ReceiptServiceImpl implements ReceiptService{
         return receiptRepo.save(newReceipt);
     }
 
+    @Transactional
     @Override
     public Receipt updateReceipt(long receiptId, Receipt receipt) {
         Receipt currentReceipt = receiptRepo.findByReceiptid(receiptId);
@@ -68,6 +71,7 @@ public class ReceiptServiceImpl implements ReceiptService{
         return receiptRepo.save(currentReceipt);
     }
 
+    @Transactional
     @Override
     public void deleteReceipt(long receiptId) {
         Receipt receipt = receiptRepo.findByReceiptid(receiptId);
