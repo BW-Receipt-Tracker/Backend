@@ -65,6 +65,10 @@ public class User extends Auditable
     @JsonIgnoreProperties("user")
     private List<Useremail> useremails = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("user")
+    private List<Receipt> receipts = new ArrayList<>();
+
     public User()
     {
     }
@@ -176,5 +180,13 @@ public class User extends Auditable
         }
 
         return rtnList;
+    }
+
+    public List<Receipt> getReceipts() {
+        return receipts;
+    }
+
+    public void setReceipts(List<Receipt> receipts) {
+        this.receipts = receipts;
     }
 }
