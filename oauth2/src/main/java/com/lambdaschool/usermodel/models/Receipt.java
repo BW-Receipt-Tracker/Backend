@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "receipts")
-@JsonIgnoreProperties(value = {"user"})
+@JsonIgnoreProperties(value = {"user", "hasAmountSet"})
 public class Receipt {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
