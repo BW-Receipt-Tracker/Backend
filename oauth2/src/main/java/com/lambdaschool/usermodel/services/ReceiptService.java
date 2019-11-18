@@ -9,7 +9,7 @@ public interface ReceiptService {
 
     Receipt findReceiptById(long receiptId);
 
-    Receipt addReceipt(Receipt receipt);
+    Receipt addReceipt(long userid, Receipt receipt);
 
     Receipt updateReceipt(long receiptId, Receipt receipt);
 

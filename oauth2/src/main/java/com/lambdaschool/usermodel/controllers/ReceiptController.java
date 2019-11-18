@@ -25,9 +25,9 @@ public class ReceiptController {
         return new ResponseEntity<>(receiptService.findReceiptById(receiptid), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/receipt", consumes = "application/json")
-    ResponseEntity<?> addReceipt(@Valid @RequestBody Receipt receipt){
-        receiptService.addReceipt(receipt);
+    @PostMapping(value = "/receipt/{userid}", consumes = "application/json")
+    ResponseEntity<?> addReceipt(@Valid @RequestBody Receipt receipt, @PathVariable long userid){
+        receiptService.addReceipt(userid, receipt);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

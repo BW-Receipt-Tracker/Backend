@@ -31,6 +31,9 @@ public class Receipt {
     @JsonIgnoreProperties("receipts")
     private User user;
 
+    @Transient
+    public boolean hasAmountSet = false;
+
     public Receipt() {
     }
 
@@ -64,6 +67,7 @@ public class Receipt {
     }
 
     public void setAmount(double amount) {
+        hasAmountSet = true;
         this.amount = amount;
     }
 
