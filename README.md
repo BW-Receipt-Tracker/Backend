@@ -9,35 +9,11 @@ User Endpoints:
   * Requires JSON User body username, password  returns access_token
 * POST /createnewuser 
   * Requires JSON User body primaryemail, username, password  returns access_token
-  
-| RequestType | EndPoint       | Request Example                                                                                                                                                                                                                                                                                                                                                                                                                     | Response Example                                                                                                                                                        |
-|-------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| POST        | /createnewuser | @Body JSON Object 
-{
-"primaryemail" : "demo@demo.com",
-"username" : "demo",
-"password" : "demo" 
-}                                                                                                                                                                                                                                                                                                            | Status: 201 Created 
-{
-"access_token": "e73f96a6-d60d-4abb-9802-1a567c7f97da",
-"token_type": "bearer",
-"expires_in": 3599,
-"scope": "read trust write" 
-} |
-| POST        | /login         | @Headers (These login headers will always be static)
-Key: Content-Type   Value: application/x-www-form-urlencoded
-Key: Authorization   Value: Basic bGFtYmRhLWNsaWVudDpsYW1iZGEtc2VjcmV0
 
-@Body (the content type here is x-www-form-urlencoded)
-Key: grant_type   Value: password   (this key and value will be the same for everyone)
-Key: username   Value: demo   (your username)
-Key: password   Value: demo   (your password) | Status: 200 OK 
-{
-"access_token": "e73f96a6-d60d-4abb-9802-1a567c7f97da",
-"token_type": "bearer",
-"expires_in": 2625,
-"scope": "read trust write"
-}      |
+| RequestType 	| EndPoint       	| Request Example                                                                                                                                                                                                                                                                                                                                                                                                                                          	| Response Example                                                                                                                                                                          	|
+|-------------	|----------------	|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
+| POST        	| /createnewuser 	| @Body JSON Object<br>{<br>        "primaryemail" : "demo@demo.com",<br>        "username" : "demo",<br>        "password" : "demo"<br>}                                                                                                                                                                                                                                                                                                                  	| Status: 201 Created<br>{<br>    "access_token": "e73f96a6-d60d-4abb-9802-1a567c7f97da",<br>    "token_type": "bearer",<br>    "expires_in": 3599,<br>    "scope": "read trust write"<br>} 	|
+| POST        	| /login         	| @Headers (These login headers will always be static)<br>Key: Content-Type   Value: application/x-www-form-urlencoded<br>Key: Authorization   Value: Basic bGFtYmRhLWNsaWVudDpsYW1iZGEtc2VjcmV0<br><br>@Body (the content type here is x-www-form-urlencoded)<br>Key: grant_type   Value: password   (this key and value will be the same for everyone)<br>Key: username   Value: demo   (your username)<br>Key: password   Value: demo   (your password) 	| Status: 200 OK<br>{<br>    "access_token": "e73f96a6-d60d-4abb-9802-1a567c7f97da",<br>    "token_type": "bearer",<br>    "expires_in": 2625,<br>    "scope": "read trust write"<br>}      	|
 
 
 Receipt Endpoints:
