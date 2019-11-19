@@ -1,17 +1,20 @@
 package com.lambdaschool.usermodel.services;
 
 import com.lambdaschool.usermodel.models.Receipt;
+import org.springframework.security.core.AuthenticationException;
 
 import java.util.List;
 
 public interface ReceiptService {
-    List<Receipt> getReceipts();
+    List<Receipt> getUserReceipts(String username);
 
-    Receipt findReceiptById(long receiptId);
+//    List<Receipt> getReceipts();
 
-    Receipt addReceipt(long userid, Receipt receipt);
+    Receipt findReceiptById(long receiptId, String username);
 
-    Receipt updateReceipt(long receiptId, Receipt receipt);
+    Receipt addReceipt(String username, Receipt receipt);
 
-    void deleteReceipt(long receiptId);
+    Receipt updateReceipt(long receiptId, Receipt receipt, String username);
+
+    void deleteReceipt(long receiptId, String username);
 }
