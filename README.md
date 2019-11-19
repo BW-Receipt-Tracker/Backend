@@ -12,14 +12,14 @@ User Endpoints:
 
 
 Receipt Endpoints:
-* GET /receipts/receipts
+* GET /receipts/{Username}
   * Gets all User Receipts 
 * GET /receipts/receipt/{receipt's id}
   * Gets receipt by id
 * PUT /receipts/receipt/{id}
   * (update receipt)
   * Requires changes in JSON receipt body
-* POST /receipts/receipt/{user's id} 
+* POST /receipts/receipt/{username} 
   * (adds new receipt)
   * Requires JSON body receipt
 * DELETE /receipts/receipt/delete/{receipt's id}
