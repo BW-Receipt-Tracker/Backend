@@ -1,5 +1,6 @@
 package com.lambdaschool.usermodel.controllers;
 
+import com.lambdaschool.usermodel.models.Receipt;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,11 +8,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertTrue;
@@ -23,6 +27,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
+@WithMockUser(username = "admin",
+        roles = {"USER", "ADMIN"})
 public class ReceiptControllerIntegrationTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -51,7 +57,7 @@ public class ReceiptControllerIntegrationTest {
     public void getAllReceipts() throws Exception{
         this.mockMvc.perform(get("/receipts/receipts"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Entertainment")));
+                .andExpect(content().string(containsString("[]")));
     }
 
 
