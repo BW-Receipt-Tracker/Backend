@@ -1,9 +1,6 @@
 package com.lambdaschool.usermodel;
 
-import com.lambdaschool.usermodel.models.Role;
-import com.lambdaschool.usermodel.models.User;
-import com.lambdaschool.usermodel.models.UserRoles;
-import com.lambdaschool.usermodel.models.Useremail;
+import com.lambdaschool.usermodel.models.*;
 import com.lambdaschool.usermodel.services.RoleService;
 import com.lambdaschool.usermodel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,5 +111,12 @@ public class SeedData implements CommandLineRunner
         System.out.println(u4);
         System.out.println(u5);
         System.out.println("*** Seed Data ***\n");
+
+        Receipt receipt = new Receipt("November",
+                22.06,
+                "Entertainment",
+                "Megaplex",
+                "url",
+                u1);
     }
 }
