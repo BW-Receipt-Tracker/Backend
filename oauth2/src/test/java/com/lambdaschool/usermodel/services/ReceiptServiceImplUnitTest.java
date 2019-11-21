@@ -1,6 +1,8 @@
 package com.lambdaschool.usermodel.services;
 
 import com.lambdaschool.usermodel.UserModelApplication;
+import com.lambdaschool.usermodel.exceptions.ResourceNotFoundException;
+import com.lambdaschool.usermodel.exceptions.UserDoesntHavePermissionException;
 import com.lambdaschool.usermodel.models.Receipt;
 import org.junit.After;
 import org.junit.Before;
@@ -42,12 +44,17 @@ public class ReceiptServiceImplUnitTest {
     }
 
     @Test
-    public void findReceiptById() {
+    public void B_findReceiptById() {
         assertEquals("Entertainment", receiptService.findReceiptById(7, "admin").getCategory());
     }
 
+    @Test(expected = UserDoesntHavePermissionException.class)
+    public void B_findReceiptByIdOtherId() {
+        assertEquals("Entertainment", receiptService.findReceiptById(12, "admin").getCategory());
+    }
+
     @Test
-    public void addReceipt() {
+    public void B_addReceipt() {
         Receipt newReceipt = new Receipt("NovemberIsBest",
                 22.06,
                 "Entertainment",
@@ -59,8 +66,12 @@ public class ReceiptServiceImplUnitTest {
     }
 
     @Test
-    public void updateReceipt() {
+    public void X_updateReceipt() {
         Receipt newReceipt = new Receipt();
+        newReceipt.setDate("Nov 19");
+        newReceipt.setCategory("Enter");
+        newReceipt.setMerchantname("Mega");
+        newReceipt.setAmount(52.06);
         newReceipt.setImageurl("image");
         assertEquals("image", receiptService.updateReceipt(7, newReceipt, "admin").getImageurl());
     }
@@ -68,6 +79,17 @@ public class ReceiptServiceImplUnitTest {
     @Test
     public void Z_deleteReceipt() {
         receiptService.deleteReceipt(7, "admin");
-        assertEquals(1, receiptService.getUserReceipts("admin").size());
+        assertEquals(2, receiptService.getUserReceipts("admin").size());
+    }
+
+    @Test(expected = UserDoesntHavePermissionException.class)
+    public void XX_updateReceiptWithOtherId() {
+        Receipt newReceipt = new Receipt();
+        assertEquals("image", receiptService.updateReceipt(12, newReceipt, "admin").getImageurl());
+    }
+
+    @Test(expected = UserDoesntHavePermissionException.class)
+    public void ZZ_deleteReceiptWithOtherId() {
+        receiptService.deleteReceipt(12, "admin");
     }
 }

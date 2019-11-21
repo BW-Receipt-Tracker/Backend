@@ -84,7 +84,14 @@ public class SeedData implements CommandLineRunner
         u2.getUseremails()
           .add(new Useremail(u2,
                              "bunny@email.local"));
+        Receipt receipt2 = new Receipt("November",
+                22.06,
+                "Entertainment",
+                "Megaplex",
+                "url",
+                u2);
         u2 = userService.save(u2);
+        receiptService.addReceipt(u2.getUsername(), receipt2);
 
         // user
         ArrayList<UserRoles> users = new ArrayList<>();
