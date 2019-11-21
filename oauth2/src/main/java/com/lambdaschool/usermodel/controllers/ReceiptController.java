@@ -3,6 +3,8 @@ package com.lambdaschool.usermodel.controllers;
 import com.lambdaschool.usermodel.models.Receipt;
 import com.lambdaschool.usermodel.services.ReceiptService;
 import io.swagger.annotations.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,7 @@ public class ReceiptController {
     @Autowired
     ReceiptService receiptService;
 
-//    Logger logger = LoggerFactory.getLogger(ReceiptController.class);
+    Logger logger = LoggerFactory.getLogger(ReceiptController.class);
 
     //localhost:2019/receipts/receipts
     @ApiOperation(value = "returns all User Specific receipts", response = Receipt.class, responseContainer = "List")
@@ -28,6 +30,7 @@ public class ReceiptController {
     })
     @GetMapping(value = "/receipts", produces = "application/json")
     ResponseEntity<?> getReceiptsByUser(Authentication authentication) {
+        logger.info("User: " + authentication.getName() + " requested all their receipts");
         return new ResponseEntity<>(receiptService.getUserReceipts(authentication.getName()), HttpStatus.OK);
     }
 
@@ -39,6 +42,7 @@ public class ReceiptController {
     })
     @GetMapping(value = "/receipt/{receiptid}", produces = "application/json")
     ResponseEntity<?> findReceiptById(@ApiParam(value = "Receipt ID", required = true, example = "4") @PathVariable long receiptid, Authentication authentication) {
+        logger.info("User: " + authentication.getName() + " requested receipt by id " + receiptid);
         return new ResponseEntity<>(receiptService.findReceiptById(receiptid, authentication.getName()), HttpStatus.OK);
     }
 
@@ -49,6 +53,7 @@ public class ReceiptController {
     })
     @PostMapping(value = "/receipt", consumes = "application/json")
     ResponseEntity<?> addReceipt(@ApiParam(value = "Full Receipt, Image not Required", required = true)@Valid @RequestBody Receipt receipt, Authentication authentication) {
+        logger.info("User: " + authentication.getName() + " made api call to add a receipt");
         receiptService.addReceipt(authentication.getName(), receipt);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -61,6 +66,7 @@ public class ReceiptController {
     })
     @PutMapping(value = "/receipt/{receiptid}", consumes = "application/json")
     ResponseEntity<?> updateReceipt(@ApiParam(value = "Receipt fields needing an update", required = true)@RequestBody Receipt receipt, @ApiParam(value = "Receipt ID", required = true, example = "4")@PathVariable long receiptid, Authentication authentication) {
+        logger.info("User: " + authentication.getName() + " made an api call to update receipt of id " + receiptid);
         receiptService.updateReceipt(receiptid, receipt, authentication.getName());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -73,6 +79,7 @@ public class ReceiptController {
     })
     @DeleteMapping(value = "/receipt/delete/{receiptid}")
     ResponseEntity<?> deleteReceipt(@ApiParam(value = "Receipt ID", required = true, example = "4")@PathVariable long receiptid, Authentication authentication) {
+        logger.info("User: " + authentication.getName() + " made a call to delete receipt of id " + receiptid);
         receiptService.deleteReceipt(receiptid, authentication.getName());
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -7,6 +7,7 @@ import com.lambdaschool.usermodel.models.Receipt;
 import com.lambdaschool.usermodel.models.User;
 import com.lambdaschool.usermodel.repository.ReceiptRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -95,6 +96,7 @@ public class ReceiptServiceImpl implements ReceiptService{
         }
     }
 
+    @Modifying
     @Transactional
     @Override
     public void deleteReceipt(long receiptId, String username) {
@@ -102,7 +104,7 @@ public class ReceiptServiceImpl implements ReceiptService{
 
         if (receipt.getUser().getUsername().equals(username)){
             if (receipt.getCategory() != null){
-                receiptRepo.delete(receipt);
+                receiptRepo.removeReciept(receiptId);
             }else{
                 throw new ResourceNotFoundException("Receipt ID Does not Exist");
             }
