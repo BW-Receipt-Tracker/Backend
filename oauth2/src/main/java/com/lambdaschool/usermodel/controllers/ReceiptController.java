@@ -5,10 +5,8 @@ import com.lambdaschool.usermodel.services.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
 @RestController
@@ -25,25 +23,11 @@ public class ReceiptController {
         return new ResponseEntity<>(receiptService.getUserReceipts(authentication.getName()), HttpStatus.OK);
     }
 
-//    //localhost:2019/receipts/receipts
-//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-//    @GetMapping(value = "/receipts", produces = "application/json")
-//    ResponseEntity<?> getReceipts(){
-//        return new ResponseEntity<>(receiptService.getReceipts(), HttpStatus.OK);
-//    }
-
     //localhost:2019/receipts/receipt/{receiptid}
     @GetMapping(value = "/receipt/{receiptid}", produces = "application/json")
     ResponseEntity<?> findReceiptById(@PathVariable long receiptid, Authentication authentication){
         return new ResponseEntity<>(receiptService.findReceiptById(receiptid, authentication.getName()), HttpStatus.OK);
     }
-
-//    //localhost:2019/receipts/receipt/{username}
-//    @PostMapping(value = "/receipt/{username}", consumes = "application/json")
-//    ResponseEntity<?> addReceipt(@Valid @RequestBody Receipt receipt, @PathVariable String username){
-//        receiptService.addReceipt(username, receipt);
-//        return new ResponseEntity<>(HttpStatus.CREATED);
-//    }
 
     //localhost:2019/receipts/receipt
     @PostMapping(value = "/receipt", consumes = "application/json")

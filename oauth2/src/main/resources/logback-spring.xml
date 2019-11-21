@@ -74,6 +74,7 @@
 
     <logger name="com.lambdaschool" level="INFO" additivity="false">
         <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
     </logger>
 
     <logger name="org.springframework" level="INFO" additivity="false">

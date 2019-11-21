@@ -1,9 +1,7 @@
 package com.lambdaschool.usermodel;
 
-import com.lambdaschool.usermodel.models.Role;
-import com.lambdaschool.usermodel.models.User;
-import com.lambdaschool.usermodel.models.UserRoles;
-import com.lambdaschool.usermodel.models.Useremail;
+import com.lambdaschool.usermodel.models.*;
+import com.lambdaschool.usermodel.services.ReceiptService;
 import com.lambdaschool.usermodel.services.RoleService;
 import com.lambdaschool.usermodel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +20,9 @@ public class SeedData implements CommandLineRunner
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    ReceiptService receiptService;
 
 
     @Override
@@ -53,7 +54,16 @@ public class SeedData implements CommandLineRunner
         u1.getUseremails()
           .add(new Useremail(u1,
                              "admin@mymail.local"));
+
+        Receipt receipt = new Receipt("November",
+                22.06,
+                "Entertainment",
+                "Megaplex",
+                "url",
+                u1);
         u1 = userService.save(u1);
+
+        receiptService.addReceipt(u1.getUsername(), receipt);
 
         // data, user
         ArrayList<UserRoles> datas = new ArrayList<>();
@@ -74,7 +84,14 @@ public class SeedData implements CommandLineRunner
         u2.getUseremails()
           .add(new Useremail(u2,
                              "bunny@email.local"));
+        Receipt receipt2 = new Receipt("November",
+                22.06,
+                "Entertainment",
+                "Megaplex",
+                "url",
+                u2);
         u2 = userService.save(u2);
+        receiptService.addReceipt(u2.getUsername(), receipt2);
 
         // user
         ArrayList<UserRoles> users = new ArrayList<>();
