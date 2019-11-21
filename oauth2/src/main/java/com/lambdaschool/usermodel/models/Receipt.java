@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "receipts")
 @JsonIgnoreProperties(value = {"user", "hasAmountSet"})
-public class Receipt {
+public class Receipt extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long receiptid;
