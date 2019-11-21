@@ -51,7 +51,9 @@ public class Swagger2Config
                                                             new Tag("LogoutEndpoint",
                                                                     "Endpoint for logging out a user"),
                                                             new Tag("OpenEndpoint",
-                                                                    "Endpoints available to all"));
+                                                                    "Endpoints available to all"),
+                                                              new Tag("ReceiptEndpoints",
+                                                                      "Endpoints for receipts"));
 
     }
 
@@ -59,9 +61,9 @@ public class Swagger2Config
     {
         return new ApiInfoBuilder().title("User Model Project")
                                    .description("User Model Project but in more detail")
-                                   .contact(new Contact("John Mitchell",
-                                                        "http://www.lambdaschool.com",
-                                                        "john@lambdaschool.com"))
+                                   .contact(new Contact("Justin Gent",
+                                                        "",
+                                                        "justinbgent@gmail.com"))
                                    .license("MIT")
                                    .licenseUrl("https://github.com/LambdaSchool/java-usermodel/blob/master/LICENSE")
                                    .version(("1.0.0"))
